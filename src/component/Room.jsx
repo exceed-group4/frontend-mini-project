@@ -25,17 +25,19 @@ const Room = ({ name }) => {
     return (
         <div className='room-setting'>
             <h2>{name}</h2>
-            <div>
-                <div onChange={(e) => {
+
+            <div class="state-wrapper">
+                <div class="state-choice" onChange={(e) => {
                     setRoom(e.target.value)
                     console.log(e.target.value)
                     toggleDisabled(e.target.value)
                 }}>
+                    <p class="state">State:</p>
                     <input type="radio" value='auto' name='mode' />Auto
                     <input type="radio" value='manual' name='mode' />Manual
                 </div>
-
             </div>
+
             <label class="switch" id="switch-part">
                 <input type="checkbox" id='switch-on-off' value='' onChange={toogleIsLoading} />
                 <span class="slider round"></span>
