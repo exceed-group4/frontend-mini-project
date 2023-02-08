@@ -1,28 +1,43 @@
 import React, { useEffect, useState } from 'react'
-// import { getRooms } from '../services/read'
-import { addRoom, getRoom } from '../services/read'
+import RoomCom from './RoomCom'
 
 
 const Room = () => {
-    const [room, setRoom] = useState(true)
+    const [mode, setMode] = useState(1)
+    const [light, setLight] = useState(0)
+    const [onOff, setOnOff] = useState(0)
 
-    // const [id, setID] = useState("")
-    // const [mode, setMode] = useState("")
-    // const [status, setStatus] = useState("")
-    // const [light, setLight] = useState("")
+    useEffect(() => {
+        try {
+            fetch("http://group4.exceed19.online/status").then((r_data) => {
+                if (r_data.status === 400) {
+                    console.log("not found")
+                }
+                else {
+                    r_data.json().then((d) => {
+                        console.log("result", d)
+                    }
+                )
+                }
+            })
+        }
+        catch (error) {
+            console.log("error")
+        }
+    },[])
 
     useEffect(() => {
         //event.preventDefault()
         const payload = {
-            "id": 2,
-            "mode": 1,
-            "status": 1,
-            "light": 200
+            "id": 1,
+            "mode": mode,
+            "status": onOff,
+            "light": light
         }
 
         let status = 0
 
-        fetch('http://group4.exceed19.online/status', {
+        fetch('http://group4.exceed19.online/update/front', {
             method: 'PUT', // or 'PUT'
             mode: 'cors',
             headers: {
@@ -36,61 +51,46 @@ const Room = () => {
             })
             .then((data) => {
                 if (status === 200) {
-                    alert(data.detail)
+                    console.log(data.detail)
                 }
                 else if (status === 422) {
-                    alert("Please complete all fields.")
+                    console.log("Please complete all fields.")
                 }
                 else {
-                    alert(data.detail)
+                    console.log(data.detail)
                 }
             })
             .catch((error) => {
                 console.error('Error:', error);
             });
-    }, [room])
+    }, [mode,onOff,light])
 
-    const toggleIsLoading = () => {
-        setRoom(current => (!current))
-        console.log(room)
+    const onOffSetting = () => {
+        const onOffButton = document.getElementById('switch-on-off')
+        if (onOffButton.checked){
+            setOnOff(0)
+        }
+        else {
+            setOnOff(1)
+        }
+        console.log(onOff)
     }
 
-    const toggleDisabled = (mode) => {
+    const modeSetting = event => {
         const toggleButton = document.getElementById('switch-on-off')
-        if (mode === 'auto') {
+        if (event.target.value === '1') {
             toggleButton.setAttribute('disabled', '')
-            // console.log(room)
+            setMode(1)
         }
-        if (mode === 'manual') {
+        if (event.target.value === '2') {
             toggleButton.removeAttribute('disabled')
+            setMode(2)
         }
     }
 
     return (
         <div className='room-setting'>
-            <h2></h2>
-            <div>
-                <div onChange={(e) => {
-                    setRoom(e.target.value)
-                    console.log(e.target.value)
-                    toggleDisabled(e.target.value)
-                }}>
-                    <input type="radio" value='auto' name='mode' />Auto
-                    <input type="radio" value='manual' name='mode' />Manual
-                </div>
-
-            </div>
-            <label class="switch" id="switch-part">
-                <input type="checkbox" id='switch-on-off' value='' onChange={toggleIsLoading} />
-                <span class="slider round"></span>
-            </label>
-            <div>
-                <button class="set-bright" name='bright-value' value={55} onClick={e => console.log(55)}>1</button>
-                <button class="set-bright" name='bright-value' value={105} onClick={e => console.log(105)}>2</button>
-                <button class="set-bright" name='bright-value' value={155} onClick={e => console.log(155)}>3</button>
-                <button class="set-bright" name='bright-value' value={205} onClick={e => console.log(205)}>4</button>
-                <button class="set-bright" name='bright-value' value={255} onClick={e => console.log(255)}>5</button>
-            </div>
+            <RoomCom name={'kitchen'} mode={mode} modeSetting={modeSetting} onOffSetting={onOffSetting} setLight={setLight}/>
         </div>
     )
 }

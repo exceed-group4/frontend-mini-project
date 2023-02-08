@@ -122,3 +122,22 @@ input:checked + .slider:before {
   /* background-color: aqua; */
   padding: 10px;
 }
+
+.room-component{
+  justify-content: center;
+}
+
+.room-title {
+  padding: 2%;
+}
+
+.mode-component {
+  padding: 2%;
+}
+
+.switch-setting {
+}
+
+.bright-setting {
+  padding: 5%;
+}
