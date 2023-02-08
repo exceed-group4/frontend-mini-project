@@ -111,3 +111,14 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+.state {
+  margin: 10px;
+  /* background-color: aqua;
+  display: inline-block; */
+}
+
+.room-name {
+  /* background-color: aqua; */
+  padding: 10px;
+}

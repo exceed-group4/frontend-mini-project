@@ -20,6 +20,7 @@ const Room = ({ name }) => {
             toggleButton.removeAttribute('disabled')
         }
     }
+    name = name[0].toUpperCase() + name.slice(1)
 
     return (
         <div className='room-setting'>
@@ -39,8 +40,6 @@ const Room = ({ name }) => {
                 <input type="checkbox" id='switch-on-off' value='' onChange={toogleIsLoading} />
                 <span class="slider round"></span>
             </label>
-
-
         </div>
     )
 }
