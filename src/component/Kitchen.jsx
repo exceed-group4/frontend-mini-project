@@ -3,13 +3,13 @@ import React, { useEffect, useState } from 'react'
 import { addRoom, getRoom } from '../services/read'
 
 
-const Room = () => {
+const Kitchen = () => {
     const [room, setRoom] = useState(true)
+    let lightSet = 0
 
-    // const [id, setID] = useState("")
-    // const [mode, setMode] = useState("")
-    // const [status, setStatus] = useState("")
-    // const [light, setLight] = useState("")
+    let setLight = (num) => {
+        lightSet = num
+    }
 
     useEffect(() => {
         //event.preventDefault()
@@ -17,7 +17,7 @@ const Room = () => {
             "id": 2,
             "mode": 1,
             "status": 1,
-            "light": 200
+            "light": lightSet
         }
 
         let status = 0
@@ -68,7 +68,7 @@ const Room = () => {
 
     return (
         <div className='room-setting'>
-            <h2></h2>
+            <h2>Kitchen</h2>
             <div>
                 <div onChange={(e) => {
                     setRoom(e.target.value)
@@ -85,14 +85,14 @@ const Room = () => {
                 <span class="slider round"></span>
             </label>
             <div>
-                <button class="set-bright" name='bright-value' value={55} onClick={e => console.log(55)}>1</button>
-                <button class="set-bright" name='bright-value' value={105} onClick={e => console.log(105)}>2</button>
-                <button class="set-bright" name='bright-value' value={155} onClick={e => console.log(155)}>3</button>
-                <button class="set-bright" name='bright-value' value={205} onClick={e => console.log(205)}>4</button>
-                <button class="set-bright" name='bright-value' value={255} onClick={e => console.log(255)}>5</button>
+                <button class="set-bright" name='bright-value' value={55} onClick={e => setLight(55)}>1</button>
+                <button class="set-bright" name='bright-value' value={105} onClick={e => setLight(105)}>2</button>
+                <button class="set-bright" name='bright-value' value={155} onClick={e => setLight(155)}>3</button>
+                <button class="set-bright" name='bright-value' value={205} onClick={e => setLight(205)}>4</button>
+                <button class="set-bright" name='bright-value' value={255} onClick={e => setLight(255)}>5</button>
             </div>
         </div>
     )
 }
 
-export default Room
+export default Kitchen
