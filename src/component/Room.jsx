@@ -10,19 +10,21 @@ const Room = ({name}) => {
         console.log(room)
     }
 
+    name = name[0].toUpperCase() + name.slice(1)
+
     return (
         <div className='room-setting'>
-            <h2>{name}</h2>
-            <div>
-            <RadioFormField name="State:" groupName="mode" choices={["auto", "manual"]} onChange={(e) => {setRoom(e.target.value)
-            console.log(e.target.value)}} />
+            <h2 class="room-name">{name}</h2>
+
+            <div class="state">
+                <RadioFormField name="State:" groupName="mode" choices={["auto", "manual"]} onChange={(e) => {setRoom(e.target.value)
+                console.log(e.target.value)}} />
             </div>
+
             <label class="switch">
                 <input type="checkbox" value='' onChange={toogleIsLoading}/>
                 <span class="slider round"></span>
             </label>
-
-            
         </div>
     )
 }
