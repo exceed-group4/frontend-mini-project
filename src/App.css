@@ -114,11 +114,11 @@ input:checked + .slider:before {
 
 .state {
   margin: 10px;
-  /* background-color: aqua;
-  display: inline-block; */
 }
 
 .room-name {
-  /* background-color: aqua; */
   padding: 10px;
+  width: 90%;
+  margin: 0 auto;
+  border-bottom: 1px solid;
 }
