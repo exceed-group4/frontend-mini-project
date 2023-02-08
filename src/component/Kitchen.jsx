@@ -4,12 +4,11 @@ import { addRoom, getRoom } from '../services/read'
 
 
 const Kitchen = () => {
-    const [room, setRoom] = useState(true)
-    let lightSet = 0
 
-    let setLight = (num) => {
-        lightSet = num
-    }
+    const [room, setRoom] = useState(true)
+    const [light, setLight] = useState(1)
+    
+
 
     useEffect(() => {
         //event.preventDefault()
@@ -17,12 +16,12 @@ const Kitchen = () => {
             "id": 2,
             "mode": 1,
             "status": 1,
-            "light": lightSet
+            "light": light
         }
 
         let status = 0
 
-        fetch('http://group4.exceed19.online/status', {
+        fetch('http://group4.exceed19.online/update/front', {
             method: 'PUT', // or 'PUT'
             mode: 'cors',
             headers: {
@@ -48,7 +47,7 @@ const Kitchen = () => {
             .catch((error) => {
                 console.error('Error:', error);
             });
-    }, [room])
+    }, [room, light])
 
     const toggleIsLoading = () => {
         setRoom(current => (!current))
@@ -85,11 +84,11 @@ const Kitchen = () => {
                 <span class="slider round"></span>
             </label>
             <div>
-                <button class="set-bright" name='bright-value' value={55} onClick={e => setLight(55)}>1</button>
-                <button class="set-bright" name='bright-value' value={105} onClick={e => setLight(105)}>2</button>
-                <button class="set-bright" name='bright-value' value={155} onClick={e => setLight(155)}>3</button>
-                <button class="set-bright" name='bright-value' value={205} onClick={e => setLight(205)}>4</button>
-                <button class="set-bright" name='bright-value' value={255} onClick={e => setLight(255)}>5</button>
+                <button class="set-bright" name='bright-value' value={55} onClick={() => setLight(55)}>1</button>
+                <button class="set-bright" name='bright-value' value={105} onClick={() => setLight(105)}>2</button>
+                <button class="set-bright" name='bright-value' value={155} onClick={() => setLight(155)}>3</button>
+                <button class="set-bright" name='bright-value' value={205} onClick={() => setLight(205)}>4</button>
+                <button class="set-bright" name='bright-value' value={255} onClick={() => setLight(255)}>5</button>
             </div>
         </div>
     )

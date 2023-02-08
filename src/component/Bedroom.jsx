@@ -23,7 +23,7 @@ const Bedroom = () => {
 
         let status = 0
 
-        fetch('http://group4.exceed19.online/status', {
+        fetch('http://group4.exceed19.online/update/front', {
             method: 'PUT', // or 'PUT'
             mode: 'cors',
             headers: {
