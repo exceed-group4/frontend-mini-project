@@ -112,10 +112,21 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
+.state-wrapper {
+  /* padding: 5px 80px; */
+  width: 60%;
+  margin: 0 auto;
+}
+
 .state {
+  display: inline-block;
   margin: 10px;
-  /* background-color: aqua;
-  display: inline-block; */
+}
+
+.state-choice {
+  margin: 20px;
+  border: 2px #282c34 solid;
+  border-radius: 100px;
 }
 
 .room-name {
